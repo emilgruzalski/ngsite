@@ -9,7 +9,8 @@ This tool provides an interactive way to manage Nginx server configurations. It 
 - **Disable Configurations**: Input a regular expression to identify and disable specific Nginx server configurations.
 
 ## Requirements
-- Python 3
+- Python 3.x
+- `colorama`
 - Nginx installed on your system
 - Access to /etc/nginx/sites-available and /etc/nginx/sites-enabled directories
 
@@ -22,7 +23,7 @@ pip install colorama
 ## Usage
 To use the tool, run the script and choose an option from the menu:
 ```bash
-python combined_nginx_script.py
+python ngsite.py
 ```
 - `1`: List configurations (using a regular expression).
 - `2`: Enable configurations (using a regular expression).
