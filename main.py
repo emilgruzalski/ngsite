@@ -1,5 +1,16 @@
 from __future__ import print_function
+
 import inquirer
+from utils import (
+    get_sites_available,
+    get_sites_enabled,
+    enable_site,
+    disable_site,
+    edit_site,
+    add_site,
+    delete_site,
+)
+
 
 def main():
     # Lista dostępnych opcji
@@ -34,23 +45,73 @@ def main():
     elif choice == 'Wyjdź':
         exit()
 
+
 def list_sites():
-    # TODO: Zaimplementuj funkcję wyświetlającą listę dostępnych witryn
+    """Wyświetla listę dostępnych witryn."""
+    sites_available = get_sites_available()
+    sites_enabled = get_sites_enabled()
+
+    print('Dostępne witryny:')
+    for site in sites_available:
+        print('  - {}'.format(site))
+
+    print('Włączone witryny:')
+    for site in sites_enabled:
+        print('  - {}'.format(site))
+
 
 def enable_site():
-    # TODO: Zaimplementuj funkcję włączającą witrynę
+    """Włącza witrynę."""
+    sites_available = get_sites_available()
+
+    # Wybór witryny do włączenia
+    site_name = inquirer.prompt([
+        inquirer.List('site_name', 'Wybierz witrynę do włączenia:', sites_available),
+    ])['site_name']
+
+    enable_site(site_name)
+
 
 def disable_site():
-    # TODO: Zaimplementuj funkcję wyłączającą witrynę
+    """Wyłącza witrynę."""
+    sites_enabled = get_sites_enabled()
+
+    # Wybór witryny do wyłączenia
+    site_name = inquirer.prompt([
+        inquirer.List('site_name', 'Wybierz witrynę do wyłączenia:', sites_enabled),
+    ])['site_name']
+
+    disable_site(site_name)
+
 
 def edit_site():
-    # TODO: Zaimplementuj funkcję edytującą konfigurację witryny
+    """Edytuje konfigurację witryny."""
+    sites_available = get_sites_available()
+
+    # Wybór witryny do edycji
+    site_name = inquirer.prompt([
+        inquirer.List('site_name', 'Wybierz witrynę do edycji:', sites_available),
+    ])['site_name']
+
+    # TODO: Zaimplementuj edycję konfiguracji witryny
+
 
 def add_site():
-    # TODO: Zaimplementuj funkcję dodającą nową witrynę
+    """Dodaje nową witrynę."""
+    # TODO: Zaimplementuj dodanie nowej witryny
+
 
 def delete_site():
-    # TODO: Zaimplementuj funkcję usuwającą witrynę
+    """Usuwa witrynę."""
+    sites_enabled = get_sites_enabled()
+
+    # Wybór witryny do usunięcia
+    site_name = inquirer.prompt([
+        inquirer.List('site_name', 'Wybierz witrynę do usunięcia:', sites_enabled),
+    ])['site_name']
+
+    delete_site(site_name)
+
 
 if __name__ == '__main__':
     main()
